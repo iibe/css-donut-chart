@@ -2,6 +2,13 @@
 
 Quick demonstration SVG and CSS3 possibilities of drawing donut charts.
 
+## Table on contents
+
+- [Theory](#theory)
+  - [Formula of current segment for stroke-dashoffset](#formula-of-current-segment-for-stroke-dashoffset)
+  - [Formula of space between circles](#formula-of-space-between-circles)
+- [Examples](#examples)
+
 ## Theory
 
 > NOTE: For a more detailed description of everything written below, check out [this][article] article.
@@ -39,7 +46,7 @@ $stroke-width-with-space: $donut-cell-width * 2; // 0.5 * 2 = 1
 $stroke-width-without-space: $donut-cell-width;
 ```
 
-### Examples
+## Examples
 
 ```bash
 ### Circles without space between:

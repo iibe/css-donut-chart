@@ -5,7 +5,7 @@ $donut-cell-width: $svg-viewbox-size * 0.02;
 // $svg-overflow-padding: ($svg-viewbox-size / 100) * $donut-ring-width;
 
 .donut {
-  // animation: spin 120s linear infinite;
+  animation: spin 120s linear infinite;
   overflow: visible;
 
   &__hole {
