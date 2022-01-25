@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donut chart</title>
+    <link rel="stylesheet" href="./scss/index.css" />
+  </head>
+  <body>
+    <aside>
+      <h1>Donut chart</h1>
+      <hr />
+      <br />
+      <h2></h2>
+      <br />
+      <table id="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Bet</th>
+            <th>Seat</th>
+            <th>Odds</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <template id="table-row">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </template>
+    </aside>
+    <main>
+      <svg
+        id="donut"
+        class="donut"
+        viewBox="0 0 31.830988618379067153776752674503 31.830988618379067153776752674503"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle class="donut__hole" cx="50%" cy="50%" r="25%"></circle>
+        <circle
+          class="donut__ring"
+          cx="50%"
+          cy="50%"
+          r="15.915494309189533576888376337251"
+        ></circle>
+      </svg>
+    </main>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

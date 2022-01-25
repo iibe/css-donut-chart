@@ -1,0 +1,48 @@
+$background-sm: #262833;
+$background-md: #22232b;
+$background-xl: #1d1e22;
+
+$border-radius-sm: 3px;
+$border-radius-md: 5px;
+$border-radius-xl: 10px;
+
+$donut-color-0: #ffaf5f;
+$donut-color-1: #4acfac;
+$donut-color-2: #7e8ce0;
+$donut-color-3: #b57ee0;
+$donut-color-4: #ef4444;
+$donut-color-5: #ffa48e;
+$donut-color-6: #36c7d0;
+$donut-color-7: #5c6ccf;
+$donut-color-8: #a059d9;
+$donut-color-9: #dc2626;
+
+$donut-color-10: #bcc3cd; // common
+$donut-color-11: #6596e2; // uncommon
+$donut-color-12: #4b68cc; // rare
+$donut-color-13: #8846ff; // mythical
+$donut-color-14: #d22ce6; // legendary
+$donut-color-15: #eb4b4b; // ancient
+$donut-color-16: #caab05; // exceedingly-rare
+$donut-color-17: #886a08; // immortal
+
+$donut-colors: (
+  $donut-color-0,
+  $donut-color-1,
+  $donut-color-2,
+  $donut-color-3,
+  $donut-color-4,
+  $donut-color-5,
+  $donut-color-6,
+  $donut-color-7,
+  $donut-color-8,
+  $donut-color-9,
+  $donut-color-10,
+  $donut-color-11,
+  $donut-color-12,
+  $donut-color-13,
+  $donut-color-14,
+  $donut-color-15,
+  $donut-color-16,
+  $donut-color-17
+);

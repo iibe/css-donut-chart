@@ -1,0 +1,38 @@
+$svg-viewbox-size: 31.830988618379067153776752674503;
+$donut-ring-width: $svg-viewbox-size * 0.06;
+$donut-cell-width: $svg-viewbox-size * 0.02;
+
+// $svg-overflow-padding: ($svg-viewbox-size / 100) * $donut-ring-width;
+
+.donut {
+  // animation: spin 120s linear infinite;
+  overflow: visible;
+
+  &__hole {
+    fill: $background-md;
+  }
+
+  &__ring {
+    fill: transparent;
+    stroke: $background-xl;
+    stroke-width: $donut-ring-width;
+  }
+
+  &__cell {
+    fill: transparent;
+    stroke-width: $donut-cell-width;
+    stroke-linecap: round;
+  }
+
+  @each $color in $donut-colors {
+    &__cell_color_#{index($donut-colors, $color) - 1} {
+      stroke: $color;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
