@@ -302,6 +302,8 @@ table td {
 }
 
 .donut {
+  -webkit-animation: spin 120s linear infinite;
+          animation: spin 120s linear infinite;
   overflow: visible;
 }
 
