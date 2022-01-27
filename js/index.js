@@ -1,30 +1,33 @@
-import { circleProperties, drawSvgCircleTag } from "./donut.js";
+import { cellStrokes, drawSvgCircle } from "./donut.js";
+import { getCellColor } from "./utils.js";
 import game from "./game.js";
 
 /* Render donut circles */
 const donut = document.querySelector("#donut");
 
-circleProperties.map((circlePropertie, index) => {
-  donut.appendChild(drawSvgCircleTag(index, circlePropertie));
+game.players.forEach((_, index) => {
+  donut.appendChild(drawSvgCircle(index, cellStrokes[index]));
 });
 
 /* Render table data */
 const tmpl = document.querySelector("#table-row");
-const bank = document.querySelector("aside > h2");
-const tbody = document.querySelector("#table tbody");
+const title = document.querySelector("aside > h2");
+const table = document.querySelector("#table tbody");
 
-bank.textContent = `Total bank: ${game.bank}`;
+title.textContent = `Bank: ${game.bank}`;
 
 if ("content" in document.createElement("template")) {
-  game.players.forEach(({ id, bet, seat, odds }) => {
+  game.players.forEach(({ id, bet, seat: { l, r }, odds }) => {
     const clone = tmpl.content.cloneNode(true);
     const tdata = clone.querySelectorAll("td");
     tdata[0].textContent = id;
     tdata[1].textContent = bet;
-    tdata[2].textContent = `[${seat.l} - ${seat.r}]`;
+    tdata[2].textContent = `${l} — ${r}`;
     tdata[3].textContent = `${odds}%`;
-    tbody.appendChild(clone);
+    tdata[4].style.background = getCellColor(id);
+    table.appendChild(clone);
   });
 } else {
-  // Alternative implementation for rendering
+  // TODO: Write an alternative implementation for rendering
+  // NOTE: Read donut.js file, drawSvgCircle() method for more information.
 }

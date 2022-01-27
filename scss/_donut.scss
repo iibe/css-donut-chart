@@ -1,11 +1,36 @@
-$svg-viewbox-size: 31.830988618379067153776752674503;
-$donut-ring-width: $svg-viewbox-size * 0.06;
+$svg-viewbox-size: 31.831;
 $donut-cell-width: $svg-viewbox-size * 0.02;
+$donut-ring-width: $svg-viewbox-size * 0.06;
+// $svg-overflow-padding: null;
 
-// $svg-overflow-padding: ($svg-viewbox-size / 100) * $donut-ring-width;
+.donut-wrapper {
+  animation: spin 120s linear infinite;
+  margin: auto;
+  min-height: 10rem;
+  min-width: 10rem;
+  width: 50vh;
+  height: 50vh;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: block;
+    content: "▲";
+    font-size: 2rem;
+    color: white;
+  }
+}
+
+@media (max-width: 1200px) {
+  .donut-wrapper {
+  }
+}
 
 .donut {
-  animation: spin 120s linear infinite;
   overflow: visible;
 
   &__hole {
@@ -22,12 +47,6 @@ $donut-cell-width: $svg-viewbox-size * 0.02;
     fill: transparent;
     stroke-width: $donut-cell-width;
     stroke-linecap: round;
-  }
-
-  @each $color in $donut-colors {
-    &__cell_color_#{index($donut-colors, $color) - 1} {
-      stroke: $color;
-    }
   }
 }
 

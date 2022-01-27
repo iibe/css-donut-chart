@@ -1,48 +1,74 @@
-import { round } from "./utils.js";
 import game from "./game.js";
+import { round, getCellColor } from "./utils.js";
 
-const players = [...game.players].sort((a, b) => b.bet - a.bet);
-const odds = players.map((p) => p.odds);
+const sdoBase = 25;
+const svgViewbox = 31.831;
+const cellStrokeWidth = svgViewbox * 0.02; // takes 2% of total svg size
+const cellGutterRatio = 1.5; // gutter size equal to 150% of cell stroke width
+const cellGutterCoeff = cellGutterRatio * 2;
+const cellGutter = cellGutterCoeff * cellStrokeWidth;
 
-export const circleProperties = odds.map((odd, index, array) => {
-  const svgViewboxSize = 31.830988618379067153776752674503;
-  const cellStrokeWidth = svgViewboxSize * 0.02;
-  const circleGutter = cellStrokeWidth * 2;
-  const sdo = 25;
+const numberOfGutters = game.players.length;
+const sumOfAllGutters = numberOfGutters * cellGutter;
+const correctionCoeff = 100 / (100 + sumOfAllGutters);
 
-  return {
-    sda: {
-      line: round(odd - circleGutter, 15),
-      gap: round(100 - odd + circleGutter, 15),
-    },
-    sdo: index
-      ? round(100 - array.slice(0, index).reduce((a, b) => a + b) + sdo, 15)
-      : sdo,
-  };
-});
+if (sumOfAllGutters >= 100) {
+  throw new Error("No room left for curves");
+}
+
+export const cellStrokes = game.players
+  .map(({ odds }) => odds)
+  .map((odd, index, array) => {
+    if (array.length === 1) {
+      return { sda: { curve: 100, space: 0 }, sdo: sdoBase };
+    }
+
+    const curveSize = odd * correctionCoeff;
+    const spaceSize = 100 - curveSize;
+    const sumOfOdds = array.slice(0, index).reduce((a, b) => a + b, 0);
+    const totalSize = (sumOfOdds + index * cellGutter) * correctionCoeff;
+
+    return {
+      sda: {
+        curve: round(curveSize, 15),
+        space: round(spaceSize, 15),
+      },
+      sdo: sdoBase + round(100 - totalSize, 15),
+    };
+  });
 
 /**
- *
- * @param {number} id ID.
- * @param {{sda: number, sdo: number}} sd stroke-dasharray and stroke-dashoffset properties.
- * @return {SVGCircleElement} svg <circle>...</circle> tag.
+ * HTML stroke-dasharray values.
+ * @typedef {Object} SvgStrokeDasharrayModel
+ * @property {number} curve curve size.
+ * @property {number} space space size.
  */
-export function drawSvgCircleTag(id, { sda, sdo }) {
+
+/**
+ * Svg stroke attributes.
+ * @typedef {Object} SvgStrokeModel
+ * @property {SvgStrokeDasharrayModel} sda stroke-dasharray attribute.
+ * @property {number} sdo stroke-dashoffter attribute.
+ */
+
+/**
+ * Returns donut chart call as svg <circle/> tag.
+ * @param {number} id ID.
+ * @param {SvgStrokeModel} stroke stroke-dasharray and stroke-dashoffset properties.
+ */
+export function drawSvgCircle(id, { sda, sdo }) {
   const xmlns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(xmlns, "circle");
+  const circle = document.createElementNS(xmlns, "circle");
 
-  const attrs = {
-    class: [`donut__cell`, `donut__cell_color_${id}`].join(" "),
-    cx: "50%",
-    cy: "50%",
-    r: "15.915494309189533576888376337251",
-  };
-  attrs["stroke-dasharray"] = `${sda.line} ${sda.gap}`;
-  attrs["stroke-dashoffset"] = `${sdo}`;
-
+  const attrs = { cx: "50%", cy: "50%", r: "15.9155" };
   for (const [key, value] of Object.entries(attrs)) {
-    svg.setAttribute(key, value);
+    circle.setAttribute(key, value);
   }
 
-  return svg;
+  circle.classList.add("donut__cell");
+  circle.style.stroke = getCellColor(id);
+  circle.style.strokeDasharray = `${sda.curve} ${sda.space}`;
+  circle.style.strokeDashoffset = `${sdo}`;
+
+  return circle;
 }

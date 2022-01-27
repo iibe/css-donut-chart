@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -238,12 +239,6 @@ main {
   display: flex;
 }
 
-.donut {
-  margin: auto;
-  min-height: 10rem;
-  height: 66.6%;
-}
-
 @media (max-width: 1200px) {
   body {
     -webkit-box-orient: vertical;
@@ -259,13 +254,7 @@ main {
     height: auto;
   }
   main {
-    min-height: 100vw;
-  }
-  .donut {
-    min-height: auto;
-    height: auto;
-    min-width: 10rem;
-    width: 66.6%;
+    padding: 6rem;
   }
 }
 
@@ -290,7 +279,12 @@ table thead {
 
 table tr > * {
   border: 0.1rem solid #262833;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem;
+}
+
+table tr > td:last-of-type {
+  -webkit-box-shadow: 0px 0px 0px 0.6rem #1d1e22 inset;
+          box-shadow: 0px 0px 0px 0.6rem #1d1e22 inset;
 }
 
 table th {
@@ -301,9 +295,31 @@ table td {
   font-size: 1.2rem;
 }
 
-.donut {
+.donut-wrapper {
   -webkit-animation: spin 120s linear infinite;
           animation: spin 120s linear infinite;
+  margin: auto;
+  min-height: 10rem;
+  min-width: 10rem;
+  width: 50vh;
+  height: 50vh;
+  position: relative;
+}
+
+.donut-wrapper::before {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 9999;
+  display: block;
+  content: "▲";
+  font-size: 2rem;
+  color: white;
+}
+
+.donut {
   overflow: visible;
 }
 
@@ -321,78 +337,6 @@ table td {
   fill: transparent;
   stroke-width: 0.63662;
   stroke-linecap: round;
-}
-
-.donut__cell_color_0 {
-  stroke: #ffaf5f;
-}
-
-.donut__cell_color_1 {
-  stroke: #4acfac;
-}
-
-.donut__cell_color_2 {
-  stroke: #7e8ce0;
-}
-
-.donut__cell_color_3 {
-  stroke: #b57ee0;
-}
-
-.donut__cell_color_4 {
-  stroke: #ef4444;
-}
-
-.donut__cell_color_5 {
-  stroke: #ffa48e;
-}
-
-.donut__cell_color_6 {
-  stroke: #36c7d0;
-}
-
-.donut__cell_color_7 {
-  stroke: #5c6ccf;
-}
-
-.donut__cell_color_8 {
-  stroke: #a059d9;
-}
-
-.donut__cell_color_9 {
-  stroke: #dc2626;
-}
-
-.donut__cell_color_10 {
-  stroke: #bcc3cd;
-}
-
-.donut__cell_color_11 {
-  stroke: #6596e2;
-}
-
-.donut__cell_color_12 {
-  stroke: #4b68cc;
-}
-
-.donut__cell_color_13 {
-  stroke: #8846ff;
-}
-
-.donut__cell_color_14 {
-  stroke: #d22ce6;
-}
-
-.donut__cell_color_15 {
-  stroke: #eb4b4b;
-}
-
-.donut__cell_color_16 {
-  stroke: #caab05;
-}
-
-.donut__cell_color_17 {
-  stroke: #886a08;
 }
 
 @-webkit-keyframes spin {

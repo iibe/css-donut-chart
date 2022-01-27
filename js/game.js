@@ -24,16 +24,16 @@ import { round, range } from "./utils.js";
  */
 
 /**
- * Returns game imitation object.
- * @return {GameModel} game imitation model.
+ * Returns game imitation model.
+ * @return {GameModel} imitation model.
  */
-function generator() {
+function generateNewGame() {
   // generate random number of players
-  const [min, max] = [10, 16];
+  const [min, max] = [1, 36];
   const players = range(min, max);
 
   // generate game metadata
-  const bets = Array.from({ length: players }, () => range(1e3, 5e3));
+  const bets = Array.from({ length: players }, () => range(1e2, 5e3));
   const bank = bets.reduce((a, b) => a + b, 0);
   const odds = bets.map((bet) => {
     const percentage = (bet / bank) * 100;
@@ -62,6 +62,4 @@ function generator() {
   };
 }
 
-const game = generator();
-
-export default game;
+export default generateNewGame();

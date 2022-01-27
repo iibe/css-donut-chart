@@ -37,13 +37,13 @@ However, unlike `stroke-dasharray`, `stroke-dashoffset` moves **counter-clockwis
 
 ### Formula of space between circles
 
-With space: `stroke-width * 2`
-Without space: `stroke-width`
+`space_between = stroke_width * coefficient`, where `coefficient > 1`.
 
-```scss
-$donut-cell-width: 0.5;
-$stroke-width-with-space: $donut-cell-width * 2; // 0.5 * 2 = 1
-$stroke-width-without-space: $donut-cell-width;
+```js
+const sdo = 25;
+const svgViewbox = 31.831;
+const strokeWidth = svgViewbox * 0.02; // take 2% of total svg size
+const spaceBetween = strokeWidth * 2; // with space
 ```
 
 ## Examples
@@ -82,6 +82,8 @@ $stroke-width-without-space: $donut-cell-width;
 
 ```bash
 ### Circles with space between:
+
+## Let space-between = 1;
 
 # Circle 1:
   ------------------------

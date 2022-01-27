@@ -46,12 +46,6 @@ main {
   display: flex;
 }
 
-.donut {
-  margin: auto;
-  min-height: 10rem;
-  height: 66.6%;
-}
-
 @media (max-width: 1200px) {
   body {
     flex-direction: column;
@@ -64,14 +58,7 @@ main {
   }
 
   main {
-    min-height: 100vw;
-  }
-
-  .donut {
-    min-height: auto;
-    height: auto;
-    min-width: 10rem;
-    width: 66.6%;
+    padding: 6rem;
   }
 }
 
@@ -95,7 +82,11 @@ table {
 
   tr > * {
     border: 0.1rem solid $background-sm;
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem;
+  }
+
+  tr > td:last-of-type {
+    box-shadow: 0px 0px 0px 0.6rem $background-xl inset;
   }
 
   th {
